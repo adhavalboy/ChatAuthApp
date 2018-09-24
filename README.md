@@ -10,8 +10,8 @@ with POST, PUT, DELETE, GET requests
 # Run NPM START <br />
 and browse https://localhost:1234
 
-To get data from DB --> get('/', controller.findAll);
-To get data specifically from one userID --> get('/:UserId', controller.getUserData);
-To enter data to DB --> post('/post', controller.postUserData);
-To edit data to DB --> put('/:UserId/put', controller.putUserData);
+To get data from DB --> get('/', controller.findAll); <br />
+To get data specifically from one userID --> get('/:UserId', controller.getUserData); <br />
+To enter data to DB --> post('/post', controller.postUserData);<br />
+To edit data to DB --> put('/:UserId/put', controller.putUserData);<br />
 To drop the data using UserId --> delete('/:UserId/delete', controller.deleteUserData);
