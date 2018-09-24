@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Users = new Schema({
-    UserId: {type: Number },
-    username: {type: String, required: true}
+    
+    UserID: {type: Number },
+    username: {type: String, required: true},
+    message : {type: String}
+    
 });
 
 // Export the model
