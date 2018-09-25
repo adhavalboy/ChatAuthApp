@@ -6,19 +6,19 @@ var moment = require('moment');
 var bodyParser = require ('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors');
-const controller = require('./controllers/controller')
+const controller = require('./controllers/controller');
+const UserData = require('./routers/router');
+
 
 users = [];
 connections = [];
 messages = [];
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/chatappAnuj',{ useNewUrlParser: true } , function (err) {
+mongoose.connect('mongodb://localhost:27017/chatapp',{ useNewUrlParser: true } , function (err) {
   if (err) throw err;
   console.log('Successfully connected to database');
 });
-//var Message = mongoose.model('Message',{id: Number, name : String, message : String, type: Text });
-
 
 server.listen(process.env.PORT || 8888);
 server.listen(1337, function(){
@@ -27,12 +27,13 @@ server.listen(1337, function(){
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/UserData', UserData);
+
 app.get('/',function(req,res){
     res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/users',function(req,res){
-   // var users1 = JSON.stringify.parse(users); 
     res.send(users);
 });
 

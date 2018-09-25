@@ -1,13 +1,19 @@
 {
-  "name": "db-crud",
+  "name": "final-chat",
   "version": "1.0.0",
-  "main": "app.js",
+  "description": "Chat App using SocketIO and MongoDB NodeJS",
+  "main": "server.js",
   "scripts": {
-    "test": "npm start"
+    "test": "npm start",
+    "start": "node server.js"
   },
-  "author": "",
+  "keywords": [
+    "node",
+    "socketio",
+    "mongodb"
+  ],
+  "author": "Anuj Raval",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",

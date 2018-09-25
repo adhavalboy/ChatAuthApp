@@ -19,18 +19,18 @@ exports.getUserData =  (req, res) => {
 };
 
 exports.postUserData =  (req, res) => {
-    console.log("Test 1");
+    //console.log("Test 1");
     let users = new Users({
         UserID: req.body.UserID,
         username: req.body.username,
         message: req.body.message   
     }); 
-    console.log("Test 2");
+    //console.log("Test 2");
     users.save((err) => {
         if (err) throw err;
         res.send('User Created');
     });
-    console.log("Test 3");
+    //console.log("Test 3");
 };
 
 
@@ -56,7 +56,7 @@ exports.addMessageToDb = (data) => {
         newMessage.save((err) => {
             if (err) return reject(err);
             resolve()
-            // saved!
+           
         });
     })
 }
