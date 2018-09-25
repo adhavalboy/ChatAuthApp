@@ -49,3 +49,14 @@ exports.deleteUserData =  (req, res) => {
     });
 };
 
+
+exports.addMessageToDb = (data) => {
+    return new Promise((resolve, reject) => {
+        const newMessage = new Users(data);
+        newMessage.save((err) => {
+            if (err) return reject(err);
+            resolve()
+            // saved!
+        });
+    })
+}

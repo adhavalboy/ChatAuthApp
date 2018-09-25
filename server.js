@@ -3,32 +3,33 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var moment = require('moment');
-//var bodyParser = require ('body-parser');
-//var mongoose = require('mongoose');
+var bodyParser = require ('body-parser');
+var mongoose = require('mongoose');
 var cors = require('cors');
+const controller = require('./controllers/controller')
 
 users = [];
 connections = [];
 messages = [];
 
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb://Anuj:Anuj123@ds161062.mlab.com:61062/messages',{ useNewUrlParser: true } , function (err) {
-//   if (err) throw err;
-//   console.log('Successfully connected to database');
-// });
-// //var Message = mongoose.model('Message',{id: Number, name : String, message : String, type: Text });
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/chatappAnuj',{ useNewUrlParser: true } , function (err) {
+  if (err) throw err;
+  console.log('Successfully connected to database');
+});
+//var Message = mongoose.model('Message',{id: Number, name : String, message : String, type: Text });
 
 
-// server.listen(process.env.PORT || 3000);
-// server.listen(1337, function(){
-//     console.info('Server listening on port ' + this.address().port);
-// });
+server.listen(process.env.PORT || 8888);
+server.listen(1337, function(){
+    console.info('Server listening on port ' + this.address().port);
+});
 
-// app.use(cors());
-// app.use(bodyParser.json());
-// app.get('/',function(req,res){
-//     res.sendFile(__dirname + '/index.html');
-// });
+app.use(cors());
+app.use(bodyParser.json());
+app.get('/',function(req,res){
+    res.sendFile(__dirname + '/index.html');
+});
 
 app.get('/users',function(req,res){
    // var users1 = JSON.stringify.parse(users); 
@@ -56,7 +57,20 @@ io.sockets.on('connection', function(socket){
     //Send Message 
     socket.on('send message', function(data){
         io.sockets.emit('new message', {msg: data, user: socket.username,time: moment().format('lll')});
-        res.sendStatus(200);
+        console.log({msg: data, user: socket.username});
+        const objTosave = {
+            message: data,
+            username: socket.username,
+            UserID: 123
+        }
+        controller.addMessageToDb(objTosave)
+            .then((createdMessage) => {
+                console.log('Data created')
+            })
+            .catch((err) => {
+                console.log('err');
+            })
+        // res.sendStatus(200);
     });
 
     //New Users
